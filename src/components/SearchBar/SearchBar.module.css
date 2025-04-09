@@ -2,11 +2,13 @@
   /* width: 100%; */
   background-color: blue;
   padding: 8px;
+  margin-bottom: 24px;
 }
 
 .formSearch {
-  width: 260px;
+  max-width: 360px;
   border: 4px solid darkorange;
+  border-radius: 4px;
   padding: 4;
   margin: 0 auto;
   text-align: start;

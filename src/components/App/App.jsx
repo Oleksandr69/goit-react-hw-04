@@ -1,52 +1,43 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-// import reactLogo from '../../assets/react.svg'
-// import viteLogo from '/vite.svg'
+
 import './App.css'
 import SearchBar from '../SearchBar/SearchBar';
 import ImageGallery from '../ImageGallery/ImageGallery';
+import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 
-
-// d27JQlwSrVgo4sMBiErFp0HjHT7q7um4IZue84OcpdA
-
-// 6wMe2HfsUk9Sc5DMjWxVNxgV_k3GfVpnFuw1VFD9EB4
+// applicationID = 734416
+// accessKey = d27JQlwSrVgo4sMBiErFp0HjHT7q7um4IZue84OcpdA
+// secretKey = 6wMe2HfsUk9Sc5DMjWxVNxgV_k3GfVpnFuw1VFD9EB4
 
 
 function App() {
 
   const [search, setSearch] = useState('');
-  const [result, setResult] = useState();
-  
+  const [result, setResult] = useState([]);
+  const [page, setPage] = useState(0);
+
+  const clientId = 'd27JQlwSrVgo4sMBiErFp0HjHT7q7um4IZue84OcpdA';
+    
   useEffect(() => {
 
-    const clientId = 'd27JQlwSrVgo4sMBiErFp0HjHT7q7um4IZue84OcpdA';
-    const redirectUri = '6wMe2HfsUk9Sc5DMjWxVNxgV_k3GfVpnFuw1VFD9EB4';
 
-    async function fetchArticles(value, page = 1, perPage = 10) {
-      
-      const searchParams = new URLSearchParams({
-        client_id: clientId,
-        redirect_uri: redirectUri,
-        query: value,
-        image_type: 'photo',
-        orientation: 'landscape',
-        safesearch: 'true',
-        per_page: perPage,
-        page: page,
-        lang: 'en',
-      });
-      const response = await axios.get(
-        `https://api.unsplash.com/photos/?${searchParams}`
-      );
-      console.log(response.data);
-      return response.data;
-    }
 
-    // fetchArticles(search);
-    setResult( fetchArticles(search));
+    async function fetchArticles( value, page ) {
+      try {
 
-    console.log(result);
-}, []);
+        const response = await axios.get(
+          `https://api.unsplash.com/photos/random?query=${value}&page=${page}&w=360&h=200&count=15&client_id=${clientId}`
+        );
+        setResult(prev => [...prev, ...response.data]);
+      } catch (error) {
+        console.log(error);
+      } 
+    };
+
+    search.length && fetchArticles(search);
+
+  }, [search]);
   
    return (
       <div>
@@ -54,13 +45,13 @@ function App() {
           onSearch={setSearch}
         />
         <ImageGallery
-          cardList={result}
+         cardList={result}
         />
-        {/* <ContactList
-          cardList={filteredList}
-          onDelete={deleteContact}
-        />  */}
-       
+       <LoadMoreBtn
+         setPage={setPage}
+         page={page}
+        
+        />    
     </div>
   )
 }
