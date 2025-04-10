@@ -15,7 +15,7 @@ ul {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 24px 24px;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .galleryItem {

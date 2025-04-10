@@ -1,9 +1,9 @@
 import css from './LoadMoreBtn.module.css'
 
-const LoadMoreBtn = ({ setPage, pagePrev }) => {
+const LoadMoreBtn = ({ nextPage }) => {
 
     return (
-        <button onClick={() => setPage(pagePrev + 1)}>Load more</button>
+        <button onClick= {nextPage} className={css.loadMore}>Load more</button>
     )
 };
 export default LoadMoreBtn;

@@ -3,7 +3,7 @@ import ImageCard from '../ImageCard/ImageCard';
 
 const ImageGallery = (result) => {
     
-    console.log(result);
+    // console.log(result);
     
     return (<ul className={css.gallery}>
         {result.cardList.map((card) => {
