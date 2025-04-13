@@ -1,10 +1,5 @@
 import axios from 'axios';
-
-const data = {
-  client: 734416,
-  access: 'd27JQlwSrVgo4sMBiErFp0HjHT7q7um4IZue84OcpdA',
-  secr: '6wMe2HfsUk9Sc5DMjWxVNxgV_k3GfVpnFuw1VFD9EB4',
-};
+import data from '../../klon/keys.jsx';
 
 axios.defaults.baseURL = 'https://api.unsplash.com/';
 
