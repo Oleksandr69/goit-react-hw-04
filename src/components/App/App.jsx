@@ -12,12 +12,6 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import ImageModal from '../ImageModal/ImageModal';
 
-
-// applicationID = 734416
-// accessKey = d27JQlwSrVgo4sMBiErFp0HjHT7q7um4IZue84OcpdA
-// secretKey = 6wMe2HfsUk9Sc5DMjWxVNxgV_k3GfVpnFuw1VFD9EB4
-
-
 function App() {
 
   const [search, setSearch] = useState('');
@@ -28,36 +22,42 @@ function App() {
   const [modalIsOpen, setModalOpen] = useState(false);
   const [pageMax, setPageMax] = useState(1);
   const [image, setImage] = useState({});
+  const [perPage, setPerPage] = useState(15);
   const notify = (text) => toast(text);
   
     
   useEffect(() => {
 
-    async function fetchGallery( value ) {
+    async function fetchGallery() {
       try {
         setLoading(true);
         setErrBul(false);
-        const data = await fetchData(value, page, perPage);
-        if (page > 1) {
-          setResult(prev => [...prev, ...data.results]);
-          setPageMax( data.total_pages);
-        } else {
-          setResult(data.results);
-          setPageMax( data.total_pages);
-        }
+        setPerPage(15);
+        const data = await fetchData(search, page, perPage);
+        setPageMax(data.total_pages);
+        setResult(prev => [...prev, ...data.results]);
+        // if (page > 1) {
+        //   setResult(prev => [...prev, ...data.results]);
+        //   // setPageMax( data.total_pages);
+        // } else {
+        //   setResult(data.results);
+        //   // setPageMax( data.total_pages);
+        // }
       if (data.total_pages == 0) {
         notify("Sorry. Nothing found!");
       }
       } catch (error) {
         setErrBul(true);
-        console.log(error);
+        // console.log(error);
         notify(error.message);
       } finally {
             setLoading(false);
         }
     };
-  search && fetchGallery(search);
-  }, [search, page]);
+    search && fetchGallery();
+  }, [search, page, perPage]);
+
+ 
 
   const handleNewSearch = searchNew => {
     setSearch(searchNew);
@@ -66,7 +66,11 @@ function App() {
   const handleNextPage = () => {
     setPage(page + 1);
   };
-  const perPage = 15;
+  const handleModalImage = (item) => {
+    setImage(item);
+    setModalOpen(true);
+  }
+
   
    return (
       <div>
@@ -76,8 +80,9 @@ function App() {
        
         {search && <ImageGallery
          cardList={result}
-         itemImage={setImage}
-         isModal={setModalOpen}
+         onModalImg={handleModalImage}
+        //  itemImage={setImage}
+        //  isModal={setModalOpen}
        />
        }
 

@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const clientId = 'd27JQlwSrVgo4sMBiErFp0HjHT7q7um4IZue84OcpdA';
+const clientKeys = {
+  applicationID: 734416,
+  accessKey: 'd27JQlwSrVgo4sMBiErFp0HjHT7q7um4IZue84OcpdA',
+  secretKey: '6wMe2HfsUk9Sc5DMjWxVNxgV_k3GfVpnFuw1VFD9EB4',
+};
+
 axios.defaults.baseURL = 'https://api.unsplash.com/';
 
 const fetchData = async (value, page, perPage) => {
@@ -10,7 +15,7 @@ const fetchData = async (value, page, perPage) => {
         query: value,
         page,
         per_page: perPage,
-        client_id: clientId,
+        client_id: clientKeys.accessKey,
       },
     });
 

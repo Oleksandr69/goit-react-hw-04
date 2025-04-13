@@ -1,6 +1,7 @@
 import React from 'react';
-import { useEffect } from 'react'
-import css from './ImageModal.module.css'
+import Modal from 'react-modal';
+import { useEffect } from 'react';
+import css from './ImageModal.module.css';
 
 const ImageModal = ({ photo, offModal }) => {
 
