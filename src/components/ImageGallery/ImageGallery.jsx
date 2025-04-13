@@ -1,28 +1,22 @@
 import css from './ImageGallery.module.css'
 import ImageCard from '../ImageCard/ImageCard';
 
-const ImageGallery = (result) => {
-    
-    // console.log(result);
-    
-    return (<ul className={css.gallery}>
-        {result.cardList.map((card) => {
+const ImageGallery = ({ cardList, isModal, itemImage }) => {
+        
+      return (<ul className={css.gallery}>
+        {cardList.map((card) => {
             return (<li key={card.id} className={css.galleryItem}>
                 <ImageCard
-                    photo={card}
+                photo={card}
+                onModal={isModal}
+                itemPhoto={itemImage}
                 />
                 <div className={css.galleryDl}>
                 <div>
-                  <p className={css.galleryInfo}>author</p>
-                  <p className={css.galleryValue}>{card.user.name}</p>
+                  <p className={css.galleryInfo}>author: {card.user.name}</p>
                 </div>
                 <div>
-                  <p className={css.galleryInfo}>views</p>
-                  <p className={css.galleryValue}>{card.views}</p>
-                </div>
-                <div>
-                  <p className={css.galleryInfo}>downloads</p>
-                  <p className={css.galleryValue}>{card.downloads}</p>
+                  <p className={css.galleryInfo}>likes: {card.likes}</p>
                 </div>
               </div>
             </li>);

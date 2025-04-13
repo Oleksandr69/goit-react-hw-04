@@ -2,7 +2,7 @@ import css from './SearchBar.module.css'
 import { FaSearch } from "react-icons/fa";
 import toast, { Toaster } from 'react-hot-toast';
 
-const notify = () => toast('Please enter search term!');
+const notify = (text) => toast(text);
 
 const SearchBar = ({ onSearch }) => {
   
@@ -12,7 +12,7 @@ const SearchBar = ({ onSearch }) => {
         const topic = form.elements.topic.value;
 
         if (topic.trim() === "") {
-            notify();
+            notify('Please enter search term!');
             return;
         }
         onSearch(topic);
@@ -35,9 +35,7 @@ const SearchBar = ({ onSearch }) => {
             <button type="submit" className={ css.btnSearch}> <FaSearch/></button>
             </div>
             </form>
-            <div>
-            <Toaster />
-            </div>
+
         </header>
        
     )
