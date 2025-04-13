@@ -1,6 +1,8 @@
 import axios from 'axios';
-import data from '../../klon/keys.jsx';
 
+const data = {
+  access: 'd27JQlwSrVgo4sMBiErFp0HjHT7q7um4IZue84OcpdA',
+};
 axios.defaults.baseURL = 'https://api.unsplash.com/';
 
 const fetchData = async (value, page, perPage) => {
