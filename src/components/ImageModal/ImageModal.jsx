@@ -1,33 +1,35 @@
 import React from 'react';
 import Modal from 'react-modal';
+import ReactDOM from 'react-dom';
 import { useEffect } from 'react';
 import css from './ImageModal.module.css';
 
-const ImageModal = ({ photo, offModal }) => {
+Modal.setAppElement('#root');
 
-    const handleWraperClose = e => {
-        if (e.target === e.currentTarget) {
-            offModal();
-        }
-    };
+const ImageModal = ({ isOpen, onClose, children }) => {
 
     useEffect(() => {
         const handleKeyDown = e => {
-            if (e.key === 'Escape') offModal();
+            if (e.key === 'Escape') onClose();
         };
         document.addEventListener('keydown', handleKeyDown);
 
         return () => {
             document.removeEventListener('keydown', handleKeyDown);
         };
-    }, [offModal]);
+    }, [onClose]);
 
     return (
-            <div className={css.modal}>
-              <div className={css.modalWrapper} onClick={handleWraperClose}>
-                <img src={photo.urls.regular} alt={photo.alt_description} className={css.modalImage} />
-              </div>          
-            </div> 
+        <Modal
+            isOpen={isOpen}
+            overlayClassName={css.modalOverlay}
+            className={css.modalContent}
+            closeTimeoutMS={300}
+            onRequestClose={() => onClose()}
+            ariaHideApp="false"
+        >
+            {children}
+        </Modal>
     )
 };
 export default ImageModal;

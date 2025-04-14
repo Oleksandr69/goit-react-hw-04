@@ -1,14 +1,15 @@
 import css from './ImageGallery.module.css'
 import ImageCard from '../ImageCard/ImageCard';
 
-const ImageGallery = ({ cardList, onModalImg }) => {
+const ImageGallery = ({ cardList, onModal, saveImg }) => {
         
       return (<ul className={css.gallery}>
         {cardList.map((card) => {
             return (<li key={card.id} className={css.galleryItem}>
                 <ImageCard
                 photo={card}
-                onModalImg={onModalImg}
+                onModal={onModal}
+                saveImg={saveImg}
                 />
                 <div className={css.galleryDl}>
                 <div>

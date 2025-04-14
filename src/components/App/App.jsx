@@ -36,19 +36,12 @@ function App() {
         const data = await fetchData(search, page, perPage);
         setPageMax(data.total_pages);
         setResult(prev => [...prev, ...data.results]);
-        // if (page > 1) {
-        //   setResult(prev => [...prev, ...data.results]);
-        //   // setPageMax( data.total_pages);
-        // } else {
-        //   setResult(data.results);
-        //   // setPageMax( data.total_pages);
-        // }
+
       if (data.total_pages == 0) {
         notify("Sorry. Nothing found!");
       }
       } catch (error) {
         setErrBul(true);
-        // console.log(error);
         notify(error.message);
       } finally {
             setLoading(false);
@@ -66,10 +59,15 @@ function App() {
   const handleNextPage = () => {
     setPage(page + 1);
   };
-  const handleModalImage = (item) => {
+  const handleSaveImg = (item) => {
     setImage(item);
-    setModalOpen(true);
   }
+  const handleModalOn = () => {
+    setModalOpen(true);
+  };
+  const handleModalOff = () => {
+    setModalOpen(false);
+  };
 
   
    return (
@@ -80,9 +78,8 @@ function App() {
        
         {search && <ImageGallery
          cardList={result}
-         onModalImg={handleModalImage}
-        //  itemImage={setImage}
-        //  isModal={setModalOpen}
+         onModal={handleModalOn}
+         saveImg={handleSaveImg}
        />
        }
 
@@ -95,11 +92,13 @@ function App() {
          {errBul && <ErrorMessage
          />}
        
-         {modalIsOpen && <ImageModal
-          photo={image}
-          offModal={setModalOpen}
-       
-         />} 
+       {<ImageModal
+          isOpen={modalIsOpen}
+          onClose={handleModalOff}
+       >
+         {modalIsOpen && <img src={image.urls.regular} alt={"ehahahha"} />}
+         </ImageModal>
+         } 
 
         <Toaster
           position="top-right" 
