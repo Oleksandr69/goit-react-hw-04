@@ -54,11 +54,13 @@ function App() {
 
   const handleNewSearch = searchNew => {
     setSearch(searchNew);
-    setResult([])
+    setResult([]);
+    //======== виправлено нумерацію page=======
+    setPage(1);
   };
   const handleNextPage = () => {
     setPage(page + 1);
-  };
+    };
   const handleSaveImg = (item) => {
     setImage(item);
   }
@@ -116,7 +118,6 @@ function App() {
     </div>
   )
 }
-
 export default App
 
 
