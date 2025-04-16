@@ -9,7 +9,8 @@ ul {
 .gallery {
   margin: 0 auto;
   padding: 22px;
-  max-width: 1280px;
+  /* width: 100%; */
+  /* max-width: 1280px; */
   background: #fff;
   display: flex;
   flex-direction: row;
@@ -31,11 +32,11 @@ ul {
   transform: scale(1.05);
 }
 
-.galleryImage {
+/* .galleryImage {
   height: 152px;
   width: 360px;
   object-fit: cover;
-}
+} */
 
 .galleryDl {
   margin: 0;
@@ -45,7 +46,7 @@ ul {
   gap: 32px;
   justify-content: space-around;
   text-align: center;
-  width: 360px;
+  /* width: 360px; */
   height: 48px;
   background: #fff;
 }
